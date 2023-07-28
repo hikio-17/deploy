@@ -3,7 +3,7 @@ const { createRegion } = require('../services/regionService');
 
 const createRegionHandler = asyncHandler(async (req, res) => {
   const { name } = req.body
-  await createRegion("harc code");
+  await createRegion(name);
 
   res.status(201).json({
     status: 'success',
