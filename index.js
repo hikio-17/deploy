@@ -9,7 +9,14 @@ const { errorHandler } = require('./src/middleware/errorHandler');
 
 require('dotenv').config()
 
-app.use(cors());
+const corsOptions = {
+    origin: "*",
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+    preflightContinue: false,
+    optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}))
 app.use(express.json());
