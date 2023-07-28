@@ -5,14 +5,14 @@ const morgan = require('morgan');
 const app = express()
 
 const regionRoutes = require('./src/routes/regionRoute');
-const errorHandler = require('./src/middleware/errorHandler');
+const { errorHandler } = require('./src/middleware/errorHandler');
 
 require('dotenv').config()
 
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}))
-app.use(express.json())
+app.use(express.json());
 
 app.use('/api', regionRoutes);
 
