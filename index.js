@@ -4,7 +4,7 @@ const morgan = require('morgan');
 
 const app = express()
 
-const regionRoutes = require('./routes/regionRoute');
+const regionRoutes = require('./src/routes/regionRoute');
 
 require('dotenv').config()
 
