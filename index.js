@@ -10,7 +10,7 @@ const { errorHandler } = require('./src/middleware/errorHandler');
 require('dotenv').config()
 
 const corsOptions = {
-    origin: "*",
+    origin: "http://localhost:3000",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 200
