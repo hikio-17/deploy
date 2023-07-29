@@ -10,6 +10,13 @@ const createRegion = async (name) => {
    return rows;
 }
 
+const findAllRegion = async () => {
+   const [rows] = await pool.query('SELECT * FROM Regions');
+
+   return rows;
+}
+
 module.exports = {
    createRegion,
+   findAllRegion
 }
