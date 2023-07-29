@@ -14,9 +14,9 @@ const createuser = async ({ email, fullname, password, regionId, imageProfile = 
 }
 
 const existingEmail = async (email) => {
-   const [rows] = await pool.query('SELECT * FROM Users WHERE email = ?', [email]);
-
-   if (rows) {
+   const [rows ] = await pool.query('SELECT * FROM Users WHERE email = ?', [email]);
+          
+   if (rows[0]) {
       throw new InvariantError(`Alamat email ''${email} sudah digunakan`);
    }
 }
