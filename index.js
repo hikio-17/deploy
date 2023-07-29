@@ -5,6 +5,8 @@ const morgan = require('morgan');
 const app = express()
 
 const regionRoutes = require('./src/routes/regionRoute');
+const userRoutes = require('./src/routes/userRoute');
+const authRoutes = require('./src/routes/authRoute');
 const { errorHandler } = require('./src/middleware/errorHandler');
 
 require('dotenv').config()
@@ -24,6 +26,8 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.json());
 
 app.use('/api', regionRoutes);
+app.use('/api', userRoutes);
+app.use('/api', authRoutes);
 
 /** ERROR HANDLER */
 app.use(errorHandler);
