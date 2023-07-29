@@ -42,7 +42,7 @@ const findAllUser = async ({ role, regionId }) => {
 
 const findUserById = async (userId, {role, regionId}) => {
    const [rows] = await pool.query(`
-   SELECT Users.*, Regions.name AS regionName, Devices.name as deviceName, Devices.regionId as deviceRegionId
+   SELECT Users.*, Regions.name AS regionName, Devices.name as deviceName, Devices.regionId as deviceRegionId, Devices.id as deviceId
    FROM Users
    INNER JOIN Regions ON Users.regionId = Regions.id
    INNER JOIN Devices ON Users.regionId = Devices.regionId
