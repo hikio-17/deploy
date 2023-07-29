@@ -19,8 +19,6 @@ const existingEmail = async (email) => {
    if (rows) {
       throw new InvariantError(`Alamat email ''${email} sudah digunakan`);
    }
-
-   return true;
 }
 
 module.exports = {
