@@ -21,6 +21,14 @@ const existingEmail = async (email) => {
    }
 }
 
+// const findUserById = async (userId) => {
+//    const [rows] = await pool.query('SELECT * FROM Users WHERE id = ?', [userId]);
+
+//    if (!rows[0]) {
+//       throw new Not
+//    }
+// }
+
 module.exports = {
    createuser,
    existingEmail
