@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const { createuser, existingEmail } = require('../services/userService');
+const { createuser, existingEmail, findAllUser, destroyUser, findUserById } = require('../services/userService');
 
 const createUserHandler = asyncHandler(async (req, res) => {
    await existingEmail(req.body.email);
@@ -12,7 +12,7 @@ const createUserHandler = asyncHandler(async (req, res) => {
 });
 
 const currentUserHandler = asyncHandler(async (req, res) => {
-   const user = req.user;
+   const user = await findUserById(req.user.id, (req.user));
 
    res.status(200).json({
       status: 'success',
@@ -22,7 +22,44 @@ const currentUserHandler = asyncHandler(async (req, res) => {
    })
 })
 
+const getAllUserHandler = asyncHandler(async (req, res) => {
+   const users = await findAllUser(req.user);
+
+   res.status(200).json({
+      status: 'success',
+      data: {
+         users,
+      }
+   })
+});
+
+const getUserByIdHandler = asyncHandler(async (req, res) => {
+   const { id: userId } = req.params;
+   const user = await findUserById(userId, req.user);
+
+   res.status(200).json({
+      status: 'sucess',
+      data: {
+         user
+      }
+   })
+})
+
+const deleteUserByIdHandler = asyncHandler(async(req, res) => {
+   const { id: userId } = req.params;
+
+   await destroyUser(userId, req.user);
+
+   res.status(200).json({
+      status: 'success',
+      message: `User dengan id '${userId}' berhasil dihapus`
+   });
+})
+
 module.exports = {
    createUserHandler,
    currentUserHandler,
+   getAllUserHandler,
+   getUserByIdHandler,
+   deleteUserByIdHandler,
 }
