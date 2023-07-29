@@ -1,5 +1,5 @@
 const asyncHandler = require('express-async-handler');
-const { createuser, existingEmail, findAllUser, destroyUser, findUserById } = require('../services/userService');
+const { createuser, existingEmail, findAllUser, destroyUser, findUserById, updateUser } = require('../services/userService');
 
 const createUserHandler = asyncHandler(async (req, res) => {
    await existingEmail(req.body.email);
@@ -43,7 +43,17 @@ const getUserByIdHandler = asyncHandler(async (req, res) => {
          user
       }
    })
-})
+});
+
+const updateUserByIdHandler = asyncHandler(async (req, res) => {
+   const { id: userId } = req.params;
+   await updateUser(req.user, userId, req.body);
+
+   res.status(200).json({
+      status: 'success',
+      message: `Data user dengan id '${userId}' berhasil diperbarui`
+   });
+});
 
 const deleteUserByIdHandler = asyncHandler(async(req, res) => {
    const { id: userId } = req.params;
@@ -62,4 +72,5 @@ module.exports = {
    getAllUserHandler,
    getUserByIdHandler,
    deleteUserByIdHandler,
+   updateUserByIdHandler,
 }
